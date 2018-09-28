@@ -33,4 +33,19 @@ public class MouseListener implements java.awt.event.MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean hasLClick(){
+        return lClick;
+    }
+    public boolean hasRClick(){
+        return rClick;
+    }
 }
