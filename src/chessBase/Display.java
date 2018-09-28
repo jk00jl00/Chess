@@ -1,10 +1,12 @@
+package chessBase;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Created by isjo16 on 2018-09-28.
  */
-public class Display extends JPanel {
+public class Display extends Canvas {
     private String title = "Chess";
     private JFrame frame;
 

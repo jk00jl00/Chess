@@ -1,13 +1,15 @@
+package chessBase;
+
 import java.awt.event.MouseEvent;
 
 /**
  * Created by isjo16 on 2018-09-28.
  */
 public class MouseListener implements java.awt.event.MouseListener {
-    boolean lClick;
-    boolean rClick;
-    int x;
-    int y;
+    private boolean lClick;
+    private boolean rClick;
+    private int x;
+    private int y;
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -21,7 +23,10 @@ public class MouseListener implements java.awt.event.MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        this.x = e.getX();
+        this.y = e.getY();
+        if(e.getButton() == MouseEvent.BUTTON1) lClick = true;
+        if(e.getButton() == MouseEvent.BUTTON3) rClick = true;
     }
 
     @Override
@@ -47,5 +52,12 @@ public class MouseListener implements java.awt.event.MouseListener {
     }
     public boolean hasRClick(){
         return rClick;
+    }
+
+    public void noLClick() {
+        this.lClick = false;
+    }
+    public void noRClick() {
+        this.rClick = false;
     }
 }
