@@ -61,12 +61,16 @@ public class Controller implements Runnable{
         long timer = 0;
         int ticks = 0;
 
-        board.getPieces()[7 * 8 + 7] = new Pawn(7, 7, true);
-        board.getPieces()[4 * 8 + 7] = new Pawn(7, 4, false);
-        board.getPieces()[4 * 8 + 6] = new Pawn(6, 4, false);
-        board.getPieces()[7 * 8 + 7].checkMoves(board);
-        board.getPieces()[4 * 8 + 6].checkMoves(board);
-        board.getPieces()[4 * 8 + 7].checkMoves(board);
+        //pawns
+        for(int x = 0; x<8; x++) {
+            board.getPieces()[6 * 8 + x] = new Pawn(x, 6, true);
+            board.getPieces()[1 * 8 + x] = new Pawn(x, 1, false);
+        }
+        for(Piece p: board.getPieces()){
+            if(p == null) continue;
+            p.checkMoves(board);
+        }
+
         //GameLoop
         while (running){
             now = System.nanoTime();

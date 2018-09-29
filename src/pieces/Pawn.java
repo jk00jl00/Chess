@@ -25,12 +25,12 @@ public class Pawn extends Piece {
                 if(x + i < 8 && x - i >= 0) {
                     if (board.getPieces()[(y + a) * 8 + i + x] == null && i == 0) {
                         moves.add(new Move(x + i, y + a, true, false, false));
-                    } else if (board.getPieces()[(y + a) * 8 + i + x] instanceof King) {
+                    } else if (board.getPieces()[(y + a) * 8 + i + x] instanceof King && (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer())) {
                         if(i != 0)
                             moves.add(new Move(x + i, y + a, true, (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer()),
                                     (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer())));
                         else blocked = true;
-                    } else if (board.getPieces()[(y + a) * 8 + i + x] instanceof Piece) {
+                    } else if (board.getPieces()[(y + a) * 8 + i + x] instanceof Piece && (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer())) {
                         if(i != 0)
                           moves.add(new Move(x + i, y + a, true, (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer()), false));
                         else blocked = true;
