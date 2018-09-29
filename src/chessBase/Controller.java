@@ -1,5 +1,6 @@
 package chessBase;
 
+import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
 
@@ -66,6 +67,9 @@ public class Controller implements Runnable{
             board.getPieces()[6 * 8 + x] = new Pawn(x, 6, true);
             board.getPieces()[1 * 8 + x] = new Pawn(x, 1, false);
         }
+
+        board.getPieces()[7 * 8 + 4] = new King(4, 7, true);
+        board.getPieces()[0 * 8 + 4] = new King(4, 0, false);
         for(Piece p: board.getPieces()){
             if(p == null) continue;
             p.checkMoves(board);

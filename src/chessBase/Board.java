@@ -1,6 +1,7 @@
 package chessBase;
 
 import chessHelp.Move;
+import pieces.King;
 import pieces.Piece;
 
 import java.awt.*;
@@ -22,11 +23,12 @@ public class Board {
 
     public boolean atemptMove(Piece p, int x, int y){
         if(p.getMove(x, y) != null && p.getMove(x, y).valid){
-
-            pieces[p.getY() * 8 + p.getX()] = null;
+            int ox = p.getX();
+            int oy = p.getY();
             pieces[y * 8 + x] = p;
-
+            pieces[oy * 8 + ox] = null;
             p.move(p.getMove(x, y));
+
             for(Piece c: pieces){
                 if(c == null) continue;
                 c.checkMoves(this);
@@ -36,9 +38,9 @@ public class Board {
         return false;
     }
 
-    public boolean checkCheck(Piece p){
+    public boolean checkCheck(Piece p, boolean player){
         for(Move m:p.getMoves()) {
-            if (m.check) {
+            if (m.check && p.isPlayer() != player) {
                 return true;
             }
         }
@@ -53,7 +55,6 @@ public class Board {
                 g.fillRect(x, y, width, height);
             }
         }
-        g.setColor(Color.GRAY);
         for(Piece p: pieces){
             if(p == null) continue;
             if(p.isPlayer()) g.setColor(Color.WHITE);
@@ -88,6 +89,7 @@ public class Board {
 
     public void drawMoves(Piece p, Graphics2D g) {
         for(Move m: p.getMoves()){
+            if(!m.valid) continue;
             if(m.valid) g.setColor(Color.GREEN);
             if(m.offensive) g.setColor(Color.RED);
             if(m.check) g.setColor(Color.blue);
