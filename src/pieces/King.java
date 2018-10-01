@@ -30,15 +30,17 @@ public class King extends Piece{
                     for(Piece p: board.getPieces()){
                         if(p == null || p.isPlayer() == this.isPlayer()) continue;
                         for(Move m: p.getMoves()){
-                            if(m.getX() == x + dx && m.getY() == y + dy)
-                              checkMove = true;
+                            if(m.getX() == x + dx && m.getY() == y + dy){
+                                if(p instanceof Pawn && !m.offensive) continue;
+                                checkMove = true;
+                            }
                         }
                     }
                     if(!checkMove)
                         moves.add(new Move(x + dx, y + dy, true, false, false));
                     else
                         moves.add(new Move(x + dx, y + dy, false, false, false));
-                } else if (board.getPieces()[(y + dy) * 8 + dx + x] instanceof King && (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer())) {
+                } else {
                     boolean checkMove = false;
                     for(Piece p: board.getPieces()){
                         if(p == null || p.isPlayer() == this.isPlayer()) continue;
@@ -48,25 +50,14 @@ public class King extends Piece{
                         }
                     }
                     if(!checkMove)
-                        moves.add(new Move(x + dx, y + dy, true, (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer()),
-                                (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer())));
+                        moves.add(new Move(x + dx, y + dy, board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer(),
+                                (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer()),
+                                (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer() &&
+                                        board.getPieces()[(y + dy) * 8 + dx + x] instanceof  King)));
                     else
                         moves.add(new Move(x + dx, y + dy, false, (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer()),
-                                (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer())));
-
-                } else if (board.getPieces()[(y + dy) * 8 + dx + x] instanceof Piece && (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer())) {
-                    boolean checkMove = false;
-                    for(Piece p: board.getPieces()){
-                        if(p == null || p.isPlayer() == this.isPlayer()) continue;
-                        for(Move m: p.getMoves()){
-                            if(m.getX() == x + dx && m.getY() == y + dy)
-                                checkMove = true;
-                        }
-                    }
-                    if(!checkMove)
-                        moves.add(new Move(x + dx, y + dy, true, (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer()), false));
-                    else
-                        moves.add(new Move(x + dx, y + dy, false, (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer()), false));
+                                (board.getPieces()[(y + dy) * 8 + dx + x].isPlayer() != this.isPlayer() &&
+                                        board.getPieces()[(y + dy) * 8 + dx + x] instanceof King)));
 
                 }
             }

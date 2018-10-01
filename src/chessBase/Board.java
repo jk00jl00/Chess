@@ -33,6 +33,11 @@ public class Board {
                 if(c == null) continue;
                 c.checkMoves(this);
             }
+            for(Piece c: pieces){
+                if(c == null ) continue;
+                c.checkMoves(this);
+            }
+
             return true;
         }
         return false;

@@ -27,16 +27,11 @@ public class Pawn extends Piece {
                         if(i == 0)
                             moves.add(new Move(x + i, y + a, true, false, false));
                         else{
-                            moves.add(new Move(x + i, y + a, false, false, false));
+                            moves.add(new Move(x + i, y + a, false, true, false));
                         }
-                    } else if (board.getPieces()[(y + a) * 8 + i + x] instanceof King && (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer())) {
+                    } else  {
                         if(i != 0)
-                            moves.add(new Move(x + i, y + a, true, (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer()),
-                                    (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer())));
-                        else blocked = true;
-                    } else if (board.getPieces()[(y + a) * 8 + i + x] instanceof Piece && (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer())) {
-                        if(i != 0)
-                          moves.add(new Move(x + i, y + a, true, (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer()), false));
+                          moves.add(new Move(x + i, y + a, (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer()) , (board.getPieces()[(y + a) * 8 + i + x].isPlayer() != this.isPlayer()), board.getPieces()[(y + a) * 8 + i + x] instanceof  King));
                         else blocked = true;
                     }
                 }
